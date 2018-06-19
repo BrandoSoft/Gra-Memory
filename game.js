@@ -1,4 +1,4 @@
-var cardsColor = ["red", "green", "blue", "brown", "yellow", "gray", "cadetblue", "violet", "lightgreen", "red", "green", "blue", "brown", "yellow", "gray", "cadetblue", "violet", "lightgreen"];
+const cardsColor = ["red", "green", "blue", "brown", "yellow", "gray", "cadetblue", "violet", "lightgreen", "red", "green", "blue", "brown", "yellow", "gray", "cadetblue", "violet", "lightgreen"];
 
 const cardsColorFull = ["red", "green", "blue", "brown", "yellow", "gray", "cadetblue", "violet", "lightgreen", "red", "green", "blue", "brown", "yellow", "gray", "cadetblue", "violet", "lightgreen"];
 
@@ -20,7 +20,7 @@ let gameResult = 0;
 const clickCard = function () {
     //    Mini gra - dwa kliknięcia
     activeCard = this;
-    if (activeCard == activeCards[0]) return; // jeśli ktos kliknie 2 razy w ten sam element to nie rob wykonuj kolejnych funkcji
+    if  (activeCard == activeCards[0]) return; // jeśli ktos kliknie 2 razy w ten sam element to nie rob wykonuj kolejnych funkcji
 
     activeCard.classList.remove("hidden");
     //    czy to 1 klikniecie
@@ -39,6 +39,8 @@ const clickCard = function () {
                 console.log("wygrana")
                 activeCards.forEach(card => card.classList.add("off"))
                 gameResult++;
+                cards = cards.filter(card => !card.classList.contains("off"))
+                
                 if (gamePairs == gameResult) {
                     const endTime = new Date().getTime();
                     const gameTime = (endTime - startTime) / 1000;
@@ -102,12 +104,14 @@ const demo = function () {
     
 }
 const clearAllClass = function(){
-    cards.forEach(card => card.className = '');
+    let karty2 = document.querySelectorAll("div")
+    karty2.forEach(karta => karta.className= "cos")
 }
 const updateColorTable = function(){
     cardsColor = cardsColorFull.slice();
 }
-const normalGameStart = function () {  
+const normalGameStart = function () { 
+    clearAllClass();
 //    location.reload();
     //updateColorTable();
     clearInterval(demoInterval);
